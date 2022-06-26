@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -16,8 +17,22 @@ public class ServiceClient {
         this.clientRepository = clientRepository;
     }
 
-    public List<Client> saveClient(Client client){
+    public void saveClient(Client client) {
         this.clientRepository.save(client);
-        return null;
     }
+
+    public void deleteClient(Client client) {
+        this.clientRepository.delete(client);
+    }
+
+    public List<Client> allClient() {
+        return this.clientRepository.findAll();
+    }
+
+    public Optional<Client> selectByClient(Client client){
+        return this.clientRepository.findById(client.getId());
+
+    }
+
+    
 }
